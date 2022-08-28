@@ -1,0 +1,47 @@
+				
+	Gauge coloumn	Red	+12v switched	
+		Black	GND	
+		Green	CAN	
+		Blue	CAN	
+		Yellow	Dim	
+		White	Vacuum sensor in	
+		Gray	Alarm LED +	
+		Brown	Alarm LED -	
+				
+				
+	Cat5 cable to speaker	Orange	+12v const	
+		Orange/White	GND	
+		Blue	Alarm High 12v	
+		Blue/White	+12v switched	
+		Green	CAN	
+		Green/White	CAN	
+				
+				
+	Shielded wire to radio	White	GPS out	
+		Yellow	APRS Tx	
+		Grey	APRS Rx	
+		Blue	Extra relay	
+		Green	Radio pwr relay	
+		Black/screen	GND	
+				
+				
+	Speaker pinout			
+		1	GND			Black 
+		2	+12v			Red
+		3	Ignition		Single red
+		4	Alarm	Single 	Purple
+		5	GND
+		6	CAN H			Blue TP
+		7	CAN L			Blue/White TP
+		8	GPS out		Blue 1
+		9	APRS Tx		Blue 2
+		10	APRS Rx		Blue 3
+		11	Radio Relay	Red 1
+		12	Extra relay	Red 2
+		13	+12v	
+		14	GND			Black 
+		15	GND	
+				
+				
+
+
