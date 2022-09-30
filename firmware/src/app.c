@@ -495,8 +495,8 @@ void APP_Tasks(void)
       case 8:
          if ((appData.ulLonglife > 10) && (!appData.ulRadioOn))    // Delay radio start by 10 seconds
          {   
-            // Start Radio if normal startup (ignition)
-            if (appData.uiStartupflag & STARTUP_IGNITION)
+            // Start Radio if normal startup (ignition), or ignition is on
+            if ((appData.uiStartupflag & STARTUP_IGNITION) || (!IGNITION_SENSE))
             {   
                vRelay_On(REL_RADIO);
                appData.ulRadioOn = appData.ulLonglife;              

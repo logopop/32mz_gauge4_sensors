@@ -33,8 +33,8 @@ int main ( void )
    
    while ( true )
    {     
-      SYS_Tasks ( );
-
+      SYS_Tasks( );
+ 
    }
  
    return ( EXIT_FAILURE );

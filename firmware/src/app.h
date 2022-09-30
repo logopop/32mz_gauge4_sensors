@@ -29,22 +29,22 @@
 // Display:
 // LED signal when new APRS station added
 // LED signal when we hear ourselves repeated
-// Aprs on? Send beacon on shutdown
-// SMS configurable startscreen
+// * SMS configurable startscreen
+// Improve APRS signal scale, too low now
 // 
 //
 // Sensors:
 // Command shortforms
-// SMS ignore space after 'jp'
+// * SMS ignore space after 'jp'
 // SMS settings: gyro pace and thresholds
-// Battery sens alarm after a time delay 
-// Delay after start before SMS volt/current alarm
+// * Battery sense alarm after a time delay 
 // Help screen SMS
 // Power: duty cycle for 4G
-// Turn on radio if off and receiving beacon command
-// Turn on radio after 3 minutes, independent of start up mode
+// * Turn on radio if off and receiving beacon command
+// * Turn on radio after 4 minutes, independent of start up mode
 // Send status that radio is on
-// Start communicating with radio only if it is on
+// * Start communicating with radio only if it is on
+// Aprs on? Send beacon on shutdown
 //
 // 
 // LED signals:    (0)
@@ -83,6 +83,8 @@
 // When gauge is on:
 // !+                   : Keyword to set a configuration element
 // !+b11.8              : Set battery alarm threshold
+// !+s4                 : Set startscreen < 14
+// !+t+4746644580       : Set owner phone number
 //
 //
 //
@@ -142,7 +144,7 @@ typedef                          signed long                BMP280_S32_t;
 #define                          APRS_CALLSIGN              "LA1PCA\0"           // Callsign
 #define                          APRS_CALLSIGN_EXT          "-9\0"               //
 #define                          APRS_SYMBOL                "/j"                 // Map symbol (Jeep)
-#define                          APRS_PATH                  "WIDE1-1\0"          // Routing path
+#define                          APRS_PATH                  "WIDE2-2\0"          // Routing path
 #define                          APRS_POWER                 1                    // Relative output power
 #define                          APRS_PERIOD                61                   // Seconds between non-moving transmissions
 #define                          APRS_TXFREQ                "144.800\0"          // Transmit frequency MHz
@@ -151,7 +153,7 @@ typedef                          signed long                BMP280_S32_t;
 //*********************************************************************************************************************
 // Bluetooth
 
-#define                          BT_NAME                    "\"Jeep TJ\"\0" // Device name
+#define                          BT_NAME                    "\"Jeep TJ\"\0"      // Device name
 #define                          BT_PIN                     "2001"               // Device PIN
 #define                          BT_ARRAYSIZE               20                   // Number of devices
 
@@ -170,7 +172,7 @@ typedef                          signed long                BMP280_S32_t;
 //*********************************************************************************************************************
 // GSM
 
-#define                          GSM_KEYWORD                "jp \0"              // Keyword to submit commands              
+#define                          GSM_KEYWORD                "jp\0"               // Keyword to submit commands              
 #define                          GSM_PRIMARY                "+4746644580\0"      // Primary 'owner' telephone number
 #define                          GSM_SERVICE                "+4792001000\0"      // Service center number
   
@@ -249,6 +251,12 @@ typedef struct _Configuration
    char                          cConfig2;                        // Config bits
    unsigned int                  uiConfig3;                       // Config value future use
    float                         fBatteryLimit;                   // Low level battery alarm limit
+   //
+   char                          cStartscreen;                    // Start screen  0x00 - 0x0d
+   char                          cGyroThreshold;                  // Added alerts threshold bias
+   char                          cPressmult;                      // Pressure change multiplier
+   char                          cFuture1;                        // Future use
+   char                          cFuture2;                        // 
       
 } NVM_CONFIG;
 

@@ -44,12 +44,14 @@ void vGsmRingEventHandler(void)
 //  
 //*********************************************************************************************************************
 // GSM commands  ('jp command <argument>')
-//    aprs :   run APRS radio even if ignition is not on  
-//    off :    send power off signal to shut down
-//    beacon:  ask APRS to send beacon
-//    accon:   accessory relay on
-//    accoff:  accessory relay off
-//
+// jp                   : Get standard reply
+// jp a(prs)            : Turn on APRS radio
+// jp b(eacon)          : Force beacon. Turn on radio first if necessary
+// jp o(ff)             : Turn sensor board off if ignition is not on
+// jp m<message>        : Set custom APRS message
+// jp x1                : Accessory relay on
+// jp x0                : Accessory relay off
+// 
 
 void vInterpretGsmMsg(void)
 {
@@ -61,7 +63,7 @@ void vInterpretGsmMsg(void)
    // Clear custom message     
    memset(appData.cCustomAprsMessage, 0x00, 30);
    
-   if ((!memcmp(appData.ucGsmMessage, GSM_KEYWORD, 3)) || (appData.uiGsmPendingTx))
+   if ((!memcmp(appData.ucGsmMessage, GSM_KEYWORD, 2)) || (appData.uiGsmPendingTx))
    {                  
       if (!appData.cGsmCommandHandled)
       {
@@ -82,18 +84,21 @@ void vInterpretGsmMsg(void)
          }   
          // Force APRS beacon
          if ((*(appData.ucGsmMessage + 3) == 'b') || (*(appData.ucGsmMessage + 3) == 'B'))
-         {   
+         {  
+            vRelay_On(REL_RADIO);   // Just in case
+            vLongDelay(1000);
             vAprsBeacon();
             appData.ucNo_message = 1;            
          }   
          // Accessory relay on
-         else if (!memcmp(appData.ucGsmMessage + 3, "x1", 2)) 
+         else if ((!memcmp(appData.ucGsmMessage + 3, "x1", 2)) || (!memcmp(appData.ucGsmMessage + 3, "X1", 2)))  
          {   
+            vBeep(1);
             vRelay_On(REL_ACC);   
             appData.ucNo_message = 1;            
          }   
          // Accessory relay off
-         else if (!memcmp(appData.ucGsmMessage + 3, "x0", 2)) 
+         else if ((!memcmp(appData.ucGsmMessage + 3, "x0", 2)) || (!memcmp(appData.ucGsmMessage + 3, "X0", 2)))  
          {   
             vRelay_Off(REL_ACC);   
             appData.ucNo_message = 1;            

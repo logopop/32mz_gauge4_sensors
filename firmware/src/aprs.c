@@ -814,10 +814,13 @@ void vAprs_State()
    switch (appData.uiAprsState)
    {
       case 0:     
-         if (appData.ulLonglife > 10)
-         {
-            vAprsInit();       
-            appData.uiAprsState = 2;                       
+         if (appData.ulRadioOn)
+         {   
+            if (appData.ulLonglife > 10)
+            {
+               vAprsInit();       
+               appData.uiAprsState = 2;                       
+            }   
          }   
       break;                               
 
