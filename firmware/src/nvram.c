@@ -62,6 +62,7 @@ void vNvram_State(void)
 
             sConfig.iXoff = 0;
             sConfig.iYoff = 0;  
+            sConfig.cGyroThreshold = 0;
             sConfig.fBatteryLimit = BATT_LIMIT;
          }   
          else                          // Read config object from NVram

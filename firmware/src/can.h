@@ -91,6 +91,7 @@ typedef struct
    double                           dPressure;
    double                           dVoltage;
    double                           dCurrent;
+   uint8_t                          cSignals;
 } LIFE_MSG;   
 
 // 101 Config from gauge to sensors

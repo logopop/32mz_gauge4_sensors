@@ -333,8 +333,18 @@ void vSendAlive(void)
    sLifeMsg.dPressure = appData.dPressure;
    sLifeMsg.dVoltage = appData.dVoltage;
    sLifeMsg.dCurrent = appData.dCurrent;
-
+   if (appData.cNewseen)
+   {
+      appData.cNewseen = 0;   
+      sLifeMsg.cSignals |= SIG_APRS_NEW;
+   }   
+   if (appData.cOwnseen)
+   {
+      appData.cOwnseen = 0;   
+      sLifeMsg.cSignals |= SIG_APRS_OWN;
+   }   
    vCanSendBuffer((uint8_t *)&sLifeMsg, sizeof(sLifeMsg), CID_ALIVE_H); 
+   sLifeMsg.cSignals = 0;
 }
       
 //*********************************************************************************************************************

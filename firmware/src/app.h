@@ -30,7 +30,7 @@
 // LED signal when new APRS station added
 // LED signal when we hear ourselves repeated
 // * SMS configurable startscreen
-// Improve APRS signal scale, too low now
+// * Improve APRS signal scale, too low now
 // 
 //
 // Sensors:
@@ -39,7 +39,7 @@
 // SMS settings: gyro pace and thresholds
 // * Battery sense alarm after a time delay 
 // Help screen SMS
-// Power: duty cycle for 4G
+// Power: duty cycle for 4G (N/A)
 // * Turn on radio if off and receiving beacon command
 // * Turn on radio after 4 minutes, independent of start up mode
 // Send status that radio is on
@@ -61,6 +61,7 @@
 //
 // (1)   Blue   : In sub-menu
 // (1)   Aquam. : In sub-sub setting
+// (1)   Green  : Seen new APRS station
 //
 // (2)   Red    : Exception
 // (2)   Blue   : No ham database record found
@@ -83,6 +84,8 @@
 // When gauge is on:
 // !+                   : Keyword to set a configuration element
 // !+b11.8              : Set battery alarm threshold
+// !+g100               : Gyro multiplier, 100 is neutral
+// !+p100               : Pressure variation multiplier, 100 is neutral
 // !+s4                 : Set startscreen < 14
 // !+t+4746644580       : Set owner phone number
 //
@@ -213,6 +216,12 @@ typedef                          signed long                BMP280_S32_t;
 #define                          STARTUP_TIMER              0b00000100           // Frequent startup on timer
 
 #define                          BATT_LIMIT                 11.6                 // Battery alarm limit
+
+//*********************************************************************************************************************
+// cSignals flags from sensors to display, member of CID_ALIVE
+
+#define                          SIG_APRS_NEW               0b00000001           // New APRS station seen
+#define                          SIG_APRS_OWN               0b00000010           // Own call has been repeated
 
  
 //*********************************************************************************************************************
@@ -594,7 +603,9 @@ typedef struct
    uint8_t                          cCustomAprsMessage[30];       // Custom APRS telemetry message from SMS
    unsigned long                    ulMsgTime;                    // Time custom message was created
    uint8_t                        * pcArray;
-    
+   uint8_t                          cNewseen;                     // Seen a new station
+   uint8_t                          cOwnseen;                     // Seen our own call repeated
+ 
    unsigned char                    bPrevPower;
    unsigned int                     bPrevPeriod;
    unsigned char                    bPrevAprsPath[12];

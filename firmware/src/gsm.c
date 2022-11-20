@@ -259,7 +259,7 @@ void vInterpretGsm(uint8_t * ucBuff)
       
    // Read SMS message
    else if (!memcmp(ucBuff, "CMGR:", 5))                   
-   {                              
+   {                          
       appData.uiGsmGotMsg = 1;
       pPtr1 = strchr(ucBuff, 0x2c);
       pPtr2 = strchr(pPtr1 + 1, 0x2c);    

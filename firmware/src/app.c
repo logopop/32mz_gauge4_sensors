@@ -422,8 +422,7 @@ void APP_Tasks(void)
          appData.uiMainState = 1;         
       break;
       case 1:          
-             
-         
+                    
          appData.uiMainState = 2;  
       break;                         
       case 2: 
@@ -473,7 +472,7 @@ void APP_Tasks(void)
       case 5: 
          if (appData.uiDisplayScreen == SCREEN_GYRO)         
             vGyro_State();              
-         
+                            
          appData.uiMainState = 6;  
       break;                    
       case 6: 

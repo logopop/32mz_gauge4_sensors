@@ -521,6 +521,9 @@ unsigned short usLocateCell(char * cCallsign)
       usFree = usFound3;
    }
 
+   if (!usFound2)             // Signal new entry
+      appData.cNewseen = 1;
+   
    return (usFree);
 }
 
@@ -617,6 +620,10 @@ void vParseAprsBuffers(void)
          *appData.cAprsRmw = 0;
          *appData.cAprsWpl = 0;
 
+         // Signal if own callsign
+         if (!strncmp(cCallsign, APRS_CALLSIGN, strlen(APRS_CALLSIGN)))
+            appData.cOwnseen = 1;
+         
          // Insert into array cell
          if (strlen(cCallsign))
          {
