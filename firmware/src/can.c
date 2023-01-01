@@ -301,7 +301,7 @@ void vSendGsmSignal(void)
 {        
    GSMS_MSG                      sGsmMsg;
       
-   //memset((void *)&sGsmMsg, 0x00, sizeof(GSM_MSG));
+   memset((void *)&sGsmMsg, 0x00, sizeof(GSMS_MSG));
    appData.cSigCount = 0; 
    sGsmMsg.cGsmRegistered = appData.cGsmRegistered;
    sGsmMsg.iGsmSignal = appData.iGsmSignal;

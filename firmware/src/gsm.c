@@ -159,7 +159,7 @@ void vSendGsmCan(void)
    uint8_t                       ucTemp[40]                 = {0}; 
    GSM_MSG                       sGsmMsg;
  
-   //memset((void *)&sGsmMsg, 0x00, sizeof(GSM_MSG));
+   memset((void *)&sGsmMsg, 0x00, sizeof(GSM_MSG));
    
    sGsmMsg.iGsmMsgSize = appData.iGsmMsgSize;
    strncpy(sGsmMsg.ucGsmSender, appData.ucGsmSender, 20);

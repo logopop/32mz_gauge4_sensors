@@ -474,7 +474,7 @@ void vSendGpsPosition(void)
 {
    GPS_POS_MSG sGpsPosMsg;
    
-   //memset((void *)&sGpsPosMsg, 0x00, sizeof(GPS_POS_MSG));
+   memset((void *)&sGpsPosMsg, 0x00, sizeof(GPS_POS_MSG));
    
    sGpsPosMsg.dGpsLatDec = appData.dGpsLatDec;                // Decimal latitude
    sGpsPosMsg.dGpsLonDec = appData.dGpsLonDec;                // Decimal longitude   
