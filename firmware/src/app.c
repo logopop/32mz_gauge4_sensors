@@ -488,7 +488,8 @@ void APP_Tasks(void)
       break;                    
       case 7: 
          if (appData.uiDisplayScreen == SCREEN_GYRO)         
-            vGyro_State();              
+            vGyro_State();         
+                             
          appData.uiMainState = 8;  
       break; 
       case 8:

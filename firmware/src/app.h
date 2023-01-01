@@ -62,6 +62,7 @@
 // (1)   Blue   : In sub-menu
 // (1)   Aquam. : In sub-sub setting
 // (1)   Green  : Seen new APRS station
+// (1)   Yellow : Seen ourselves
 //
 // (2)   Red    : Exception
 // (2)   Blue   : No ham database record found
@@ -85,10 +86,10 @@
 // !+                   : Keyword to set a configuration element
 // !+b11.8              : Set battery alarm threshold
 // !+g100               : Gyro multiplier, 100 is neutral
-// !+p100               : Pressure variation multiplier, 100 is neutral
+// !+p1                 : Pressure variation multiplier, 1 is neutral
 // !+s4                 : Set startscreen < 14
 // !+t+4746644580       : Set owner phone number
-//
+// !+c400               : Set display contrast bias
 //
 //
 //*********************************************************************************************************************

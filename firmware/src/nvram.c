@@ -56,14 +56,19 @@ void vNvram_State(void)
 
             memcpy(sConfig.bGsmPrimary, GSM_PRIMARY, 20);
             memcpy(sConfig.bGsmService, GSM_SERVICE, 20);
-
             memcpy(sConfig.bDnsServer, WIFI_DNS, 16);
             memcpy(sConfig.bCloudServer, WIFI_CLOUD, 40);
-
+            
+            sConfig.cConfig1 = CFG_AL_VISUAL | CFG_AL_AUDIO;  
             sConfig.iXoff = 0;
-            sConfig.iYoff = 0;  
-            sConfig.cGyroThreshold = 0;
+            sConfig.iYoff = 0;    
+            sConfig.iDispBias = 100;
+            sConfig.iGeigerCal = 0;
+            sConfig.cConfig2 = 0;
             sConfig.fBatteryLimit = BATT_LIMIT;
+            sConfig.cStartscreen = 0x01;
+            sConfig.cGyroThreshold = 100;
+            sConfig.cPressmult = 1;
          }   
          else                          // Read config object from NVram
          {

@@ -10,6 +10,10 @@
 //
 //*********************************************************************************************************************
 //
+
+
+// #define USE_TINYTRAK
+
     
 #include "app.h"
 #include "aprs.h"
@@ -52,6 +56,13 @@ void vAprs_sendcommand(char * ucBuff)
       } 
    }   
 }
+
+
+#ifdef USE_TINYTRAK
+  
+   appData.ucAprsTxbuff[1] = 0x02;
+    
+#endif
 
 //*********************************************************************************************************************
 // Decompress position
@@ -521,9 +532,9 @@ unsigned short usLocateCell(char * cCallsign)
       usFree = usFound3;
    }
 
-   if (!usFound2)             // Signal new entry
+   if (!usFound2)              // Signal new entry
       appData.cNewseen = 1;
-   
+    
    return (usFree);
 }
 

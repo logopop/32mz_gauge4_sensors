@@ -176,6 +176,8 @@ void vSendGeigerMessage()
 {  
    GEIGER_MSG sGeigerMsg;
    
+   //memset((void *)&sGeigerMsg, 0x00, sizeof(GEIGER_MSG));
+   
    sGeigerMsg.iCounts = appData.iCounts;
    sGeigerMsg.iCounts5 = appData.iCounts5;
    sGeigerMsg.iCountsMin = appData.iCountsMin;

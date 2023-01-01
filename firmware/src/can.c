@@ -10,7 +10,7 @@
 //
 //*********************************************************************************************************************
 //
-  
+
 #include "app.h"
 #include "can.h"
  
@@ -301,6 +301,7 @@ void vSendGsmSignal(void)
 {        
    GSMS_MSG                      sGsmMsg;
       
+   //memset((void *)&sGsmMsg, 0x00, sizeof(GSM_MSG));
    appData.cSigCount = 0; 
    sGsmMsg.cGsmRegistered = appData.cGsmRegistered;
    sGsmMsg.iGsmSignal = appData.iGsmSignal;
@@ -321,6 +322,7 @@ void vSendAlive(void)
 {        
    LIFE_MSG                      sLifeMsg;
    
+   memset((void *)&sLifeMsg, 0x00, sizeof(LIFE_MSG));
    memcpy(sLifeMsg.cTime, appData.cGpsTime, 6);
    memcpy(sLifeMsg.cDate, appData.cGpsDate, 6);           
    sLifeMsg.dGsmTemp = appData.dGsmTemp;
@@ -343,6 +345,7 @@ void vSendAlive(void)
       appData.cOwnseen = 0;   
       sLifeMsg.cSignals |= SIG_APRS_OWN;
    }   
+   
    vCanSendBuffer((uint8_t *)&sLifeMsg, sizeof(sLifeMsg), CID_ALIVE_H); 
    sLifeMsg.cSignals = 0;
 }
