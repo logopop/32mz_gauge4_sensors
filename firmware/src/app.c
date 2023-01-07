@@ -343,7 +343,7 @@ void APP_Initialize (void)
 void vGeigerTicks(void)
 {
    uint8_t                       uiBuff[6]                  = {0};
-
+   
    while (appData.uiTicks)
    {   
       vCanTransmit(CID_TICK, uiBuff, 1);          
@@ -403,7 +403,7 @@ void APP_Tasks(void)
    vGeigerTicks();
    
    if (appData.ulRadioOn)
-   {   
+   {        
       if ((appData.ulLonglife - appData.ulRadioOn) > 3)  // Start comms after 1 seconds on
          vAprs_State();
    }
@@ -411,8 +411,7 @@ void APP_Tasks(void)
    
    //vVoltage_State();  This is old AD based routine, replaced by INA219
    vGeigerTicks();                    
-     
-     
+          
    // Main app state ************************
    switch (appData.uiMainState)
    {
@@ -445,6 +444,7 @@ void APP_Tasks(void)
          // Emphasize CAN messages depending on VDU screen                
          switch(appData.uiDisplayScreen)
          {
+            
             case SCREEN_SPEED:
             case SCREEN_POSITION:
                vSendGpsPosition();   
@@ -465,6 +465,7 @@ void APP_Tasks(void)
             case SCREEN_SENSORS: 
                vSendAlive();
             break;
+             
          }   
           
          appData.uiMainState = 5;                             
@@ -481,9 +482,7 @@ void APP_Tasks(void)
          
          // Read INA219 current and voltage
          vGet_Voltage();
-         // Read BMP280 temperature and pressure
-         bme280_Read(); 
-                  
+                        
          appData.uiMainState = 7;  
       break;                    
       case 7: 
@@ -509,6 +508,9 @@ void APP_Tasks(void)
             appData.ulRadioOn = appData.ulLonglife; 
          }   
             
+         // Read BMP280 temperature and pressure
+         bme280_Read(); 
+         
          appData.uiMainState = 1;  
       break; 
    }

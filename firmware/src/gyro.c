@@ -92,7 +92,7 @@ void vGyro_Initialize(void)
    if(DRV_HANDLE_INVALID == appData.drvGyroHandle) 
    {
       by1306_DrawText(0, 0, "Inval Gyro!\0", FONT_ALPS);
-      while (1);  // kbdoo send message
+      return;
    }
    
    // Init registers
@@ -138,6 +138,9 @@ void vGyro_State(void)
    uint8_t                       t2                         = 0; 
    uint8_t                       ucTemp[40]                 = {0};
   
+   if (DRV_HANDLE_INVALID == appData.drvGyroHandle) 
+      return;
+     
 	switch (appData.uiGyroState)
    {
       case 0:        // Start          
@@ -172,6 +175,8 @@ void vGyro_State(void)
             uiConv[1] = uiBuffOut[1];
          appData.iGyroTemp = uiConv[1] | uiConv[0] << 8;         
          appData.uiGyroState = 3;
+         
+        
       break;
       case 3:         
          // Get X-axis

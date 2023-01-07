@@ -803,8 +803,7 @@ void vAprs_Initialize (void)
    appData.drvAprsHandle = DRV_USART_Open(DRV_USART_INDEX_1, DRV_IO_INTENT_READWRITE);
    if (DRV_HANDLE_INVALID == appData.drvAprsHandle) 
    {
-      //kbdoo message
-      while (1);
+      return;
    }
 
    // Register UART callback
@@ -828,6 +827,8 @@ void vAprs_State()
    unsigned char                 ucStartup[10]              = {0};
    unsigned char                 ucEnters[]                 = {"\x0d\x0a\0"};
 
+   if (DRV_HANDLE_INVALID == appData.drvAprsHandle) 
+      return;
    
    switch (appData.uiAprsState)
    {
